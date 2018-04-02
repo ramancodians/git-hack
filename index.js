@@ -15,10 +15,10 @@ console.log("Git Initiated");
 
 start();
 
-// app.get("/you-shall-stop", (req, res) => {
-//   end();
-//   res.send("Task Stopped");
-// })
+app.get("/you-shall-stop", (req, res) => {
+  end();
+  res.send("Task Stopped");
+})
 
 app.get("/start", (req, res) => {
   start();
