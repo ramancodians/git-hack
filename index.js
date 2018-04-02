@@ -1,8 +1,9 @@
 const express = require('express')
 const shelljs = require('shelljs')
 const app = express();
-//                                                  ms     s    m    h
-const duration = process.env.ENV === "production" ? 1000 * 60 * 60 * 12 : 1000 * 5
+const isProd = process.env.ENV === "production"
+//                        ms     s    m    h
+const duration = false  ? 1000 * 60 * 60 * 12 : 1000 * 5
 let TASK = null;
 
 console.log("Duration -> ", duration);
