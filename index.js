@@ -7,20 +7,16 @@ const duration = false  ? 1000 * 60 * 60 * 12 : 1000 * 5
 let TASK = null;
 
 console.log("Duration -> ", duration);
+shelljs.exec("git init")
+shelljs.exec("git remote add origin git@github.com:ramancodians/git-hack.git")
+console.log("Git Initiated");
 
 start();
 
-app.get("/", (req, res) => {
-  shelljs.echo("shelljs -->> ")
-
-  res.send("Hello App! Works")
-  console.log(process.env.ENV);
-})
-
-app.get("/you-shall-stop", (req, res) => {
-  end();
-  res.send("Task Stopped");
-})
+// app.get("/you-shall-stop", (req, res) => {
+//   end();
+//   res.send("Task Stopped");
+// })
 
 app.get("/start", (req, res) => {
   start();
@@ -32,6 +28,7 @@ app.listen(process.env.PORT || 5000, () => {
 })
 
 function start(){
+  console.log("Process Started");
   TASK = setInterval(() => {
     try{
       const ts = new Date().getTime()
