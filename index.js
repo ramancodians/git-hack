@@ -13,8 +13,9 @@ const REPO = `github.com/${USER}/git-hack`;
 const remote = `https://${USER}:${PASS}@${REPO}`;
 
 console.log("Duration -> ", duration);
+console.log("Remore -> ", remote);
 shelljs.exec("git init")
-shelljs.exec("git remote add origin https://github.com/ramancodians/git-hack.git")
+shelljs.exec(`git remote add origin ${remote}`)
 shelljs.exec('git config --global user.email "raman.choudhary65@gmail.com"')
 shelljs.exec('git config --global user.name "Raman Choudhary"')
 console.log("Git Initiated");
