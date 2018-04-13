@@ -54,10 +54,8 @@ function start(){
       shelljs.exec(`echo "${ts} ms" >> commit-log`);
       shelljs.exec("git add .")
       shelljs.exec(`git commit -m"commed at ${ts}ms"`)
-      shelljs.exec("git fetch origin master");
-      shelljs.exec("git reset —hard FETCH_HEAD");
+      shelljs.exec("git pull origin master --force");
       shelljs.exec("git push origin master");
-      shelljs.exec("git clean -df");
       console.log("Action Successfull");
     }catch(e){
       console.log("Action Failed");
