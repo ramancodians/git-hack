@@ -1,11 +1,13 @@
 const express = require('express')
 const shelljs = require('shelljs')
 const app = express();
+var http = require("http");
 const git = require('simple-git/promise');
 const isProd = process.env.SERIOUS === "production"
 //                        ms     s    m    h
 const duration = isProd  ? 1000 * 60 * 60 * 12 : 1000 * 5
 let TASK = null;
+let PING = null;
 const USER = process.env.GIT_USERNAME;
 const PASS = process.env.GIT_PASSWORD;
 const REPO = `github.com/${USER}/git-hack`;
@@ -25,6 +27,14 @@ start();
 app.get("/you-shall-stop", (req, res) => {
   end();
   res.send("Task Stopped");
+})
+
+app.get("/status", (req, res) => {
+  if(TASK) {
+    res.send("Running...")
+  } else {
+    res.send("Stopped :(")
+  }
 })
 
 app.get("/start", (req, res) => {
@@ -61,9 +71,17 @@ function start(){
       console.log(e);
     }
   }, duration)
+
+  PING = setInterval(() => {
+    console.log("Pinging...");
+    http.get("https://git-hack.herokuapp.com/status")
+  }, 100000)
 }
+
+
 
 function end(){
   console.log("Task Stopped");
   clearInterval(TASK)
+  TASK = null;
 }
