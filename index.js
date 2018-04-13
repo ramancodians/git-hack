@@ -2,9 +2,9 @@ const express = require('express')
 const shelljs = require('shelljs')
 const app = express();
 const git = require('simple-git/promise');
-const isProd = process.env.ENV === "production"
+const isProd = process.env.SERIOUS === "production"
 //                        ms     s    m    h
-const duration = false  ? 1000 * 60 * 60 * 12 : 1000 * 5
+const duration = isProd  ? 1000 * 60 * 60 * 12 : 1000 * 5
 let TASK = null;
 const USER = process.env.GIT_USERNAME;
 const PASS = process.env.GIT_PASSWORD;
@@ -13,7 +13,6 @@ const REPO = `github.com/${USER}/git-hack`;
 const remote = `https://${USER}:${PASS}@${REPO}`;
 
 console.log("Duration -> ", duration);
-console.log("Remore -> ", remote);
 shelljs.exec("git init")
 shelljs.exec(`git remote add origin ${remote}`)
 shelljs.exec('git config --global user.email "raman.choudhary65@gmail.com"')
