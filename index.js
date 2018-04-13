@@ -40,20 +40,20 @@ function start(){
   TASK = setInterval(() => {
     try{
       const ts = new Date().getTime()
-      git()
-      .silent(true)
-      .add("./*")
-      .commit(`added a new comment at ${ts}`)
-      .addRemote('origin', remote)
-      .push(['-u', 'origin', 'master'], () => {
-        console.log("Pushed Successfully");
-      })
-      // console.log(`Action Started at ${ts}`);
-      // shelljs.exec(`echo "${ts} ms" >> commit-log`);
-      // shelljs.exec("git add .")
-      // shelljs.exec(`git commit -m"commed at ${ts}ms"`)
-      // shelljs.exec("git push origin master");
-      // console.log("Action Successfull");
+      // git()
+      // .silent(true)
+      // .add("./*")
+      // .commit(`added a new comment at ${ts}`)
+      // .addRemote('origin', remote)
+      // .push(['-u', 'origin', 'master'], () => {
+      //   console.log("Pushed Successfully");
+      // })
+      console.log(`Action Started at ${ts}`);
+      shelljs.exec(`echo "${ts} ms" >> commit-log`);
+      shelljs.exec("git add .")
+      shelljs.exec(`git commit -m"commed at ${ts}ms"`)
+      shelljs.exec("git push origin master");
+      console.log("Action Successfull");
     }catch(e){
       console.log("Action Failed");
       console.log(e);
