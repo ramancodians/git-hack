@@ -5,7 +5,7 @@ var http = require("http");
 const git = require('simple-git/promise');
 const isProd = process.env.SERIOUS === "production"
 //                        ms     s    m    h
-const duration = isProd  ? 1000 * 60 * 60 * 12 : 1000 * 5
+const duration = isProd  ? 1000 * 60 * 60 : 1000 * 5
 let TASK = null;
 let PING = null;
 const USER = process.env.GIT_USERNAME;
