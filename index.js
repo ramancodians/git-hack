@@ -18,6 +18,7 @@ shelljs.exec("git init")
 shelljs.exec(`git remote add origin ${remote}`)
 shelljs.exec('git config --global user.email "raman.choudhary65@gmail.com"')
 shelljs.exec('git config --global user.name "Raman Choudhary"')
+shelljs.exec('git pull origin master')
 console.log("Git Initiated");
 
 start();
