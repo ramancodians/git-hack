@@ -27,6 +27,11 @@ app.get("/you-shall-stop", (req, res) => {
 app.get("/start", (req, res) => {
   start();
   res.send("Task Started");
+});
+
+app.get("/test", (req, res) => {
+  const userName = process.env.GIT_USERNAME
+  res.send(userName)
 })
 
 app.listen(process.env.PORT || 5000, () => {
