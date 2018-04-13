@@ -6,7 +6,7 @@ const isProd = process.env.ENV === "production"
 //                        ms     s    m    h
 const duration = false  ? 1000 * 60 * 60 * 12 : 1000 * 5
 let TASK = null;
-const USER = process.evn.GIT_USERNAME;
+const USER = process.env.GIT_USERNAME;
 const PASS = process.env.GIT_PASSWORD;
 const REPO = `github.com/${USER}/git-hack`;
 
@@ -30,11 +30,6 @@ app.get("/start", (req, res) => {
   start();
   res.send("Task Started");
 });
-
-app.get("/test", (req, res) => {
-  const userName = process.env.GIT_USERNAME
-  res.send(userName)
-})
 
 app.listen(process.env.PORT || 5000, () => {
   console.log("Listening at 5000");
