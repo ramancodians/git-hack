@@ -20,10 +20,6 @@ app.get("/you-shall-stop", (req, res) => {
   res.send("Task Stopped");
 })
 
-
-
-
-
 app.get("/start", (req, res) => {
   start();
   res.send("Task Started");
