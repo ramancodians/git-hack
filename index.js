@@ -1,10 +1,16 @@
 const express = require('express')
 const shelljs = require('shelljs')
 const app = express();
+const git = require('simple-git/promise');
 const isProd = process.env.ENV === "production"
 //                        ms     s    m    h
 const duration = false  ? 1000 * 60 * 60 * 12 : 1000 * 5
 let TASK = null;
+const USER = process.evn.GIT_USERNAME;
+const PASS = process.env.GIT_PASSWORD;
+const REPO = `github.com/${USER}/git-hack`;
+
+const remote = `https://${USER}:${PASS}@${REPO}`;
 
 console.log("Duration -> ", duration);
 shelljs.exec("git init")
@@ -39,12 +45,20 @@ function start(){
   TASK = setInterval(() => {
     try{
       const ts = new Date().getTime()
-      console.log(`Action Started at ${ts}`);
-      shelljs.exec(`echo "${ts} ms" >> commit-log`);
-      shelljs.exec("git add .")
-      shelljs.exec(`git commit -m"commed at ${ts}ms"`)
-      shelljs.exec("git push origin master");
-      console.log("Action Successfull");
+      git()
+      .silent(true)
+      .add("./*")
+      .commit(`added a new comment at ${ts}`)
+      .addRemote('origin', remote)
+      .push(['-u', 'origin', 'master'], () => {
+        console.log("Pushed Successfully");
+      })
+      // console.log(`Action Started at ${ts}`);
+      // shelljs.exec(`echo "${ts} ms" >> commit-log`);
+      // shelljs.exec("git add .")
+      // shelljs.exec(`git commit -m"commed at ${ts}ms"`)
+      // shelljs.exec("git push origin master");
+      // console.log("Action Successfull");
     }catch(e){
       console.log("Action Failed");
       console.log(e);
